@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#282828">
+
+    <!-- res/layout/dialog_layout.xml -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/modalTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Historial de partidas"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textColor="#fb4934"
+            android:background="#1c1c1c"/>
+
+        <TextView
+            android:id="@+id/modalContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Marco Antonio Chavez Baltierrez"
+            android:gravity="center"
+            android:textColor="#FFFF"
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/modalCloseButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar"
+            android:textColor="#FFFF"
+            style="@style/Widget.MaterialComponents.Slider"
+            android:onClick="closeModal"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

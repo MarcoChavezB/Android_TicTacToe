@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Android_TicTacToe"
         tools:targetApi="31">
         <activity
+            android:name=".Data"
+            android:exported="false" />
+        <activity
+            android:name=".data"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false" />
         <activity

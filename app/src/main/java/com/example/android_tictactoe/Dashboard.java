@@ -1,6 +1,9 @@
 package com.example.android_tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +20,8 @@ public class Dashboard extends AppCompatActivity{
             "", "", "",
             "", "", ""
     };
+
+    int countWinner = 0;
 
     boolean turno = true;
     Button btnReset;
@@ -38,9 +43,19 @@ public class Dashboard extends AppCompatActivity{
                     turno(v);
 
                     if (checkWinner(board, "X")) {
-                        ganador.setText("Ganador X");
+                        ganador.setText("Ganador: X");
+                        countWinner ++;
+                        if(mostrarData()){
+                            showCustomDialog();
+                            clearAllButtons();
+                        }
                     } else if (checkWinner(board, "O")) {
-                        ganador.setText("Ganador O");
+                        ganador.setText("Ganador: O");
+                        countWinner ++;
+                        if(mostrarData()){
+                            showCustomDialog();
+                            clearAllButtons();
+                        }
                     }
                 }
             });
@@ -124,4 +139,33 @@ public class Dashboard extends AppCompatActivity{
         return false;
     }
 
+
+    public void showCustomDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_data, null);
+
+        Button modalCloseButton = dialogView.findViewById(R.id.modalCloseButton);
+
+
+        builder.setView(dialogView);
+        final AlertDialog dialog = builder.create();
+
+        modalCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public boolean mostrarData(){
+        if (countWinner == 5){
+            return true;
+        }
+        return false;
+    }
 }
