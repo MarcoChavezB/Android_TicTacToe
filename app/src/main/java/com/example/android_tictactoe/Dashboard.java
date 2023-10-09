@@ -2,6 +2,7 @@ package com.example.android_tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,10 @@ public class Dashboard extends AppCompatActivity{
     };
 
     int countWinner = 0;
-
+    int ganadoX = 0;
+    int ganadoO = 0;
     boolean turno = true;
+
     Button btnReset;
     TextView ganador;
 
@@ -44,6 +47,7 @@ public class Dashboard extends AppCompatActivity{
 
                     if (checkWinner(board, "X")) {
                         ganador.setText("Ganador: X");
+                        ganadoX ++;
                         countWinner ++;
                         if(mostrarData()){
                             showCustomDialog();
@@ -51,6 +55,7 @@ public class Dashboard extends AppCompatActivity{
                         }
                     } else if (checkWinner(board, "O")) {
                         ganador.setText("Ganador: O");
+                        ganadoO ++;
                         countWinner ++;
                         if(mostrarData()){
                             showCustomDialog();
@@ -141,31 +146,28 @@ public class Dashboard extends AppCompatActivity{
 
 
     public void showCustomDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.activity_data, null);
+        Bundle bundle = new Bundle();
+        bundle.putInt("ganadoX", ganadoX);
+        bundle.putInt("ganadoO", ganadoO);
 
-        Button modalCloseButton = dialogView.findViewById(R.id.modalCloseButton);
-
-
-        builder.setView(dialogView);
-        final AlertDialog dialog = builder.create();
-
-        modalCloseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
+        Intent intent = new Intent(this, Data.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 
-    public boolean mostrarData(){
-        if (countWinner == 5){
+    public boolean mostrarData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            int nPartidas = bundle.getInt("nPartidas");
+            if (nPartidas + 1 == countWinner) {
+                return true;
+            }
+        }
+        if (countWinner == 3){
             return true;
         }
         return false;
     }
+
 }

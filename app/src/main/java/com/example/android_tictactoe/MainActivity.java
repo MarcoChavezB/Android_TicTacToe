@@ -65,8 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
                         return;
                     }
+
                     Intent intent = new Intent(MainActivity.this, Dashboard.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("nPartidas", nPartidas);
+                    intent.putExtras(bundle);
                     startActivity(intent);
+
                 } catch (NumberFormatException e) {
                     txtError.setVisibility(View.VISIBLE);
 
